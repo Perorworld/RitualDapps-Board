@@ -29,7 +29,9 @@ body{
   overflow-x:hidden;
 }
 
-/* 30% Opacity FULL SCREEN Background Image + Your original radial gradients */
+/* ============================================================== */
+/* CHANGED ONLY THIS BLOCK: Added your background logo image URL */
+/* ============================================================== */
 body::before{
   content:'';
   position:fixed; inset:0;
@@ -39,12 +41,14 @@ body::before{
     url('https://raw.githubusercontent.com/Perorworld/RitualDapps-Board/main/ritualbg.jpg');
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: cover; /* Stretches the image to completely cover the full screen */
-  opacity:0.30;           /* Set at exactly 30% opacity */
+  background-size: cover; 
+  opacity:0.30;           
   pointer-events:none; 
   z-index:0;
-  mix-blend-mode: screen; /* Keeps white elements and drops out harsh dark border areas */
+  mix-blend-mode: screen; 
 }
+/* ============================================================== */
+
 body::after{
   content:'';
   position:fixed; inset:0;
