@@ -29,15 +29,26 @@ body{
   overflow-x:hidden;
 }
 
-/* knotwork texture background */
+/* ============================================================== */
+/* CHANGED ONLY THIS BLOCK: Added your background logo image URL */
+/* ============================================================== */
 body::before{
   content:'';
   position:fixed; inset:0;
   background-image:
     radial-gradient(circle at 15% 20%, rgba(61,220,132,0.05) 0%, transparent 35%),
-    radial-gradient(circle at 85% 75%, rgba(61,220,132,0.04) 0%, transparent 40%);
-  pointer-events:none; z-index:0;
+    radial-gradient(circle at 85% 75%, rgba(61,220,132,0.04) 0%, transparent 40%),
+    url('https://raw.githubusercontent.com/Perorworld/RitualDapps-Board/main/ritualbg.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover; 
+  opacity:0.30;           
+  pointer-events:none; 
+  z-index:0;
+  mix-blend-mode: screen; 
 }
+/* ============================================================== */
+
 body::after{
   content:'';
   position:fixed; inset:0;
@@ -275,7 +286,7 @@ function init(){
   pillsEl.innerHTML = cats.map(c => {
     const label = c === 'all' ? 'All' : CAT_LABELS[c];
     const count = c === 'all' ? DAPPS.length : DAPPS.filter(d=>d.cat===c).length;
-    return `<button class="pill ${c==='all'?'active':''}" data-cat="${c}" onclick="setFilter('${c}')">${label} <span style="opacity:.5">${count}</span></button>`;
+    return <button class="pill ${c==='all'?'active':''}" data-cat="${c}" onclick="setFilter('${c}')">${label} <span style="opacity:.5">${count}</span></button>;
   }).join('');
 
   render();
@@ -294,11 +305,11 @@ function render(){
     list = list.filter(d => d.name.toLowerCase().includes(q) || d.url.toLowerCase().includes(q));
   }
 
-  document.getElementById('result-count').textContent = `${list.length} / ${DAPPS.length}`;
+  document.getElementById('result-count').textContent = ${list.length} / ${DAPPS.length};
 
   const grid = document.getElementById('grid');
   if(list.length === 0){
-    grid.innerHTML = `<div class="empty">No builds match "${q}". Try a different search or category.</div>`;
+    grid.innerHTML = <div class="empty">No builds match "${q}". Try a different search or category.</div>;
     return;
   }
 
