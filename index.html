@@ -29,14 +29,21 @@ body{
   overflow-x:hidden;
 }
 
-/* knotwork texture background */
+/* knotwork texture background + 30% Opacity Logo Watermark */
 body::before{
   content:'';
   position:fixed; inset:0;
   background-image:
     radial-gradient(circle at 15% 20%, rgba(61,220,132,0.05) 0%, transparent 35%),
-    radial-gradient(circle at 85% 75%, rgba(61,220,132,0.04) 0%, transparent 40%);
-  pointer-events:none; z-index:0;
+    radial-gradient(circle at 85% 75%, rgba(61,220,132,0.04) 0%, transparent 40%),
+    url('https://raw.githubusercontent.com/Perorworld/RitualDapps-Board/main/ritualbg.jpg');
+  background-position: center 30%, center 30%, center 32%;
+  background-repeat: no-repeat;
+  background-size: auto, auto, 480px;
+  opacity:0.30; 
+  pointer-events:none; 
+  z-index:0;
+  mix-blend-mode: screen;
 }
 body::after{
   content:'';
@@ -249,111 +256,7 @@ a:focus-visible, input:focus-visible, button:focus-visible{
 
 </div>
 
-<script>
-const DAPPS = [
-  { id: 1, name: "Ritual On-Chain ID", url: "https://ritual-onchain-id.vercel.app/", cat: "identity" },
-  { id: 2, name: "Ritual Stats Check", url: "https://ritual-stats-check.vercel.app/", cat: "tool" },
-  { id: 3, name: "Ritual Striker", url: "https://gritual-striker.vercel.app/", cat: "game" },
-  { id: 4, name: "Siggy Arcade", url: "https://siggy-arcade.vercel.app/", cat: "game" },
-  { id: 5, name: "Ritual Builder Proof", url: "https://ritual-builder-proof.pages.dev/", cat: "identity" },
-  { id: 6, name: "Ritual Tamagotchi", url: "https://ritual-tamagotchi.vercel.app/", cat: "game" },
-  { id: 7, name: "Ritual Console", url: "https://ritual-console.netlify.app/", cat: "tool" },
-  { id: 8, name: "Jumping Siggy", url: "https://jumping-siggy-the-pussy.vercel.app/", cat: "game" },
-  { id: 9, name: "Rekt or Rich", url: "https://ramavenom.github.io/rekt-or-rich/", cat: "game" },
-  { id: 10, name: "Ritual Micro Tap", url: "https://ritual-micro-tap.vercel.app/", cat: "game" },
-  { id: 11, name: "Research Vault", url: "https://research-vault-beta.vercel.app/", cat: "tool" },
-  { id: 12, name: "Ritual Oracle", url: "https://ritual-oracle-two.vercel.app/", cat: "tool" },
-  { id: 13, name: "Ritual Arena", url: "https://ritualarena1.vercel.app/", cat: "game" },
-  { id: 14, name: "Dia Routine Bot", url: "https://t.me/DiaRoutine_Bot", cat: "tool" },
-  { id: 15, name: "Ritcord", url: "https://www.ritcord.xyz/", cat: "social" },
-  { id: 16, name: "Siggy Ritualizer", url: "https://siggy-ritualizer.vercel.app/", cat: "creative" },
-  { id: 17, name: "Ritual Flip", url: "https://ritual-flip.vercel.app/", cat: "game" },
-  { id: 18, name: "Ritual Card PFP Generator", url: "https://ritual-card-pfp-generator.vercel.app/", cat: "creative" },
-  { id: 19, name: "Ritual LST", url: "https://ritual-lst.vercel.app/", cat: "finance" },
-  { id: 20, name: "Siggy Streaks", url: "https://siggystreaks.vercel.app/en", cat: "tool" },
-  { id: 21, name: "Guess The Ritualist", url: "https://guess-the-ritualist.vercel.app/", cat: "game" },
-  { id: 22, name: "Ritual Paws", url: "https://ritual-paws.vercel.app/", cat: "game" },
-  { id: 23, name: "Ritual Rocketpad", url: "https://ritual-rocketpad.vercel.app/", cat: "finance" },
-  { id: 24, name: "Ritual Mystery Box", url: "https://ritual-mystery-box.vercel.app/", cat: "game" },
-  { id: 25, name: "Sky Predict", url: "https://skypredict.app/", cat: "finance" },
-  { id: 26, name: "Ritual Play", url: "https://ritualplayyy.netlify.app/", cat: "game" },
-  { id: 27, name: "Siggy Miner", url: "https://siggy-miner-ritual.vercel.app/", cat: "game" },
-  { id: 28, name: "Ritual Fate Engine", url: "https://ritual-fate-engine.netlify.app/", cat: "creative" },
-  { id: 29, name: "Risa Finance", url: "https://risa-finance.netlify.app/", cat: "finance" },
-  { id: 30, name: "Ritual Learn", url: "https://ritual-learn.vercel.app/", cat: "tool" },
-  { id: 31, name: "Ritual Flip Card Game", url: "https://ritual-flip-card-game.fun/", cat: "game" },
-  { id: 32, name: "Ritualist Game", url: "https://ritualist-game.vercel.app/", cat: "game" },
-  { id: 33, name: "Ritual Tip Feed", url: "https://ritual-tip-feed-iwkg.vercel.app/", cat: "social" },
-  { id: 34, name: "The Cauldron", url: "https://the-cauldron-iota.vercel.app/", cat: "creative" },
-  { id: 35, name: "Ritual App Revoke", url: "https://ritualapp-revoke.vercel.app/", cat: "tool" },
-  { id: 36, name: "Ritual Time Capsule", url: "https://ritual-time-capsule.vercel.app/", cat: "creative" },
-  { id: 37, name: "NFT Ritual Banner X", url: "https://nft-ritual-banner-x.vercel.app/", cat: "creative" },
-  { id: 38, name: "Ritual Fortunes", url: "https://ritualfortunes-juqy.vercel.app/", cat: "creative" },
-  { id: 39, name: "Siggy Run V2", url: "https://siggyrunv2.vercel.app/", cat: "game" },
-  { id: 40, name: "Stealth Drop", url: "https://stealth-drop-omega.vercel.app/", cat: "finance" },
-  { id: 41, name: "Ritual Friend", url: "https://ritual-friend.vercel.app/", cat: "social" },
-  { id: 42, name: "Ritual Teacher", url: "https://ritual-teacher-hjb3.vercel.app/", cat: "tool" },
-  { id: 43, name: "Ritual Testnet", url: "https://ritual-testnet-six.vercel.app/", cat: "tool" },
-  { id: 44, name: "Ritual Agent Feeds", url: "https://ritual-agent-feeds.vercel.app/", cat: "tool" },
-  { id: 45, name: "Ritual dApp", url: "https://ritual-dapp.vercel.app/", cat: "tool" },
-  { id: 46, name: "Sigil Ritual", url: "https://sigil-ritual.auranode.xyz/", cat: "creative" },
-  { id: 47, name: "Ritual Signature Cards", url: "https://ritual-signature-cards.vercel.app/", cat: "creative" },
-  { id: 48, name: "Inferstake", url: "https://inferstake.vercel.app/", cat: "finance" },
-  { id: 49, name: "Ritual Scratch", url: "https://ritual-scratch.vercel.app/", cat: "game" },
-  { id: 50, name: "Ritual Relic Hunt", url: "https://ritual-relic-hunt.vercel.app/", cat: "game" },
-  { id: 51, name: "Ritual Speed Quiz", url: "https://ritual-speed-quiz.vercel.app/", cat: "game" },
-  { id: 52, name: "Ritual Carnival", url: "https://ritual-carnival.vercel.app/", cat: "game" },
-  { id: 53, name: "Ritual Pixel Quest", url: "https://ritual-pixel-quest.vercel.app/", cat: "game" },
-  { id: 54, name: "Ritual Collection", url: "https://ritual-collection.vercel.app/", cat: "creative" },
-  { id: 55, name: "Deadman Switch", url: "https://deadman-switch.netlify.app/", cat: "tool" },
-  { id: 56, name: "Cranky Dunces Unlocks", url: "https://cranky-dunces-unlocks-ritualmainnet.vercel.app/", cat: "tool" },
-  { id: 57, name: "Ritual Create Contract", url: "https://ritual-create-contract.vercel.app/", cat: "tool" },
-  { id: 58, name: "Ritual Type Edu", url: "https://ritualtypeedu.netlify.app/", cat: "tool" },
-  { id: 59, name: "Ritual Connection Identity", url: "https://ritualconnectionidentity.vercel.app/", cat: "identity" },
-  { id: 60, name: "Ritual Atlas", url: "https://ritual-atlas.vercel.app/", cat: "tool" },
-  { id: 61, name: "Ritual PFP On-Chain", url: "https://ritual-pfp-onchain.vercel.app/", cat: "creative" },
-  { id: 62, name: "Ritual Narrative Pulse", url: "https://ritual-narrative-pulse.vercel.app/", cat: "tool" },
-  { id: 63, name: "Ritty Market", url: "https://rittymarket.xyz/", cat: "finance" },
-  { id: 64, name: "Ritual Puzzles", url: "https://ritual-puzzles.vercel.app/", cat: "game" },
-  { id: 65, name: "Ritual Clicker", url: "https://ritual-clicker.vercel.app/", cat: "game" },
-  { id: 66, name: "Ritual SBT Mint", url: "https://ritual-sbt-mint-oahid.vercel.app/", cat: "identity" },
-  { id: 67, name: "Ritual Guys", url: "https://ritual-guys.vercel.app/", cat: "game" },
-  { id: 68, name: "Siggy Surf", url: "https://www.siggy.surf/", cat: "game" },
-  { id: 69, name: "My Ritual Passport", url: "https://myritualpassport.vercel.app/", cat: "identity" },
-  { id: 70, name: "Ritual Network", url: "https://ritual-network-bice.vercel.app/", cat: "tool" },
-  { id: 71, name: "Ritual Tetris", url: "https://ritual-tetris.vercel.app/", cat: "game" },
-  { id: 72, name: "Ritual PFP", url: "https://ritualpfp.xyz/", cat: "creative" },
-  { id: 73, name: "Math Ritual", url: "https://matheritual.vercel.app/", cat: "game" },
-  { id: 74, name: "The Courtroom", url: "https://the-courtroom.vercel.app/", cat: "game" },
-  { id: 75, name: "Ritual Casino", url: "https://ritual-casino.vercel.app/", cat: "game" },
-  { id: 76, name: "Ritual Wall Inference Net", url: "https://ritualwallinferencenet.netlify.app/", cat: "tool" },
-  { id: 77, name: "Ritual Wallet Dashboard", url: "https://ritual-wallet-dashboard.vercel.app/", cat: "tool" },
-  { id: 78, name: "Enshrined", url: "https://enshrined-psi.vercel.app/", cat: "identity" },
-  { id: 79, name: "Ritual Fly", url: "https://ritualfly.vercel.app/", cat: "game" },
-  { id: 80, name: "Ritual Arbiter", url: "https://ritual-arbiter.vercel.app/", cat: "tool" },
-  { id: 81, name: "Ritual Divination", url: "https://ritual-divination.vercel.app/", cat: "creative" },
-  { id: 82, name: "Ritchess", url: "https://ritchess.vercel.app/", cat: "game" },
-  { id: 83, name: "On-Chain Quiz Ritual", url: "https://onchain-quiz-ritual.vercel.app/", cat: "game" },
-  { id: 84, name: "Ritual Prompt Forge", url: "https://ritual-prompt-forge.vercel.app/", cat: "tool" },
-  { id: 85, name: "Ancestra DEX", url: "https://ancestra-dex.vercel.app/", cat: "finance" },
-  { id: 86, name: "Vein Alpha", url: "https://vein-alpha.vercel.app/", cat: "finance" },
-  { id: 87, name: "Tamasave", url: "https://tamasave.vercel.app/", cat: "tool" },
-  { id: 88, name: "Ritualmon", url: "https://ritualmon.vercel.app/", cat: "game" },
-  { id: 89, name: "Agent Bounty", url: "https://agent-bounty-ruddy.vercel.app/", cat: "tool" },
-  { id: 90, name: "Palmwise AI", url: "https://palmwise-ai.vercel.app/", cat: "creative" },
-  { id: 91, name: "Ritual Unofficial Faucet", url: "https://ritualunofficialfaucet.eu.cc/", cat: "tool" },
-  { id: 92, name: "Ritual Batch Sender", url: "https://v0-ritualbatch.vercel.app/app/sender", cat: "tool" },
-  { id: 93, name: "Ritual Profile Mint", url: "https://ritual-profile-mint-web3-mint-rvix.vercel.app/", cat: "identity" },
-  { id: 94, name: "Ritual Explorer Badge", url: "https://ritual-explorer-badge.vercel.app/", cat: "identity" },
-  { id: 95, name: "Spin Wheels Ritual", url: "https://spin-wheels-ritual.vercel.app/", cat: "game" },
-  { id: 96, name: "Ritual Community Card", url: "https://ritual-community-card.vercel.app/", cat: "social" },
-  { id: 97, name: "Shrine", url: "https://shrine.qzz.io/", cat: "creative" },
-  { id: 98, name: "Ritual Bubble Shooter", url: "https://ritual-bubble-shooter-jt.vercel.app/", cat: "game" },
-  { id: 99, name: "Ritual Dex Level", url: "https://ritualdex.vercel.app/level", cat: "finance" },
-  { id: 100, name: "Ritty AI", url: "https://ritty-ai.vercel.app/", cat: "tool" }
-];
-
-</script>
+<script src="data.js"></script>
 <script>
 const CAT_LABELS = {
   game: 'Game',
@@ -379,7 +282,7 @@ function init(){
   pillsEl.innerHTML = cats.map(c => {
     const label = c === 'all' ? 'All' : CAT_LABELS[c];
     const count = c === 'all' ? DAPPS.length : DAPPS.filter(d=>d.cat===c).length;
-    return `<button class="pill ${c==='all'?'active':''}" data-cat="${c}" onclick="setFilter('${c}')">${label} <span style="opacity:.5">${count}</span></button>`;
+    return <button class="pill ${c==='all'?'active':''}" data-cat="${c}" onclick="setFilter('${c}')">${label} <span style="opacity:.5">${count}</span></button>;
   }).join('');
 
   render();
@@ -398,11 +301,11 @@ function render(){
     list = list.filter(d => d.name.toLowerCase().includes(q) || d.url.toLowerCase().includes(q));
   }
 
-  document.getElementById('result-count').textContent = `${list.length} / ${DAPPS.length}`;
+  document.getElementById('result-count').textContent = ${list.length} / ${DAPPS.length};
 
   const grid = document.getElementById('grid');
   if(list.length === 0){
-    grid.innerHTML = `<div class="empty">No builds match "${q}". Try a different search or category.</div>`;
+    grid.innerHTML = <div class="empty">No builds match "${q}". Try a different search or category.</div>;
     return;
   }
 
