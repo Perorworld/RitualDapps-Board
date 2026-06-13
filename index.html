@@ -29,7 +29,7 @@ body{
   overflow-x:hidden;
 }
 
-/* knotwork texture background + 30% Opacity Logo Watermark */
+/* 30% Opacity FULL SCREEN Background Image + Your original radial gradients */
 body::before{
   content:'';
   position:fixed; inset:0;
@@ -37,13 +37,13 @@ body::before{
     radial-gradient(circle at 15% 20%, rgba(61,220,132,0.05) 0%, transparent 35%),
     radial-gradient(circle at 85% 75%, rgba(61,220,132,0.04) 0%, transparent 40%),
     url('https://raw.githubusercontent.com/Perorworld/RitualDapps-Board/main/ritualbg.jpg');
-  background-position: center 30%, center 30%, center 32%;
+  background-position: center center;
   background-repeat: no-repeat;
-  background-size: auto, auto, 480px;
-  opacity:0.30; 
+  background-size: cover; /* Stretches the image to completely cover the full screen */
+  opacity:0.30;           /* Set at exactly 30% opacity */
   pointer-events:none; 
   z-index:0;
-  mix-blend-mode: screen;
+  mix-blend-mode: screen; /* Keeps white elements and drops out harsh dark border areas */
 }
 body::after{
   content:'';
